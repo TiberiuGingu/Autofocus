@@ -1,5 +1,5 @@
 def main:
-    print ("Autofocus")
+    print ("Autofocus2")
 
 if __name__ == "__main__":
     main()
