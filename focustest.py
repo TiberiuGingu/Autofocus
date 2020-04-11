@@ -6,6 +6,7 @@ from matplotlib import pyplot as plt
 from random import randint
 
 def get_contrast(img):
+    print("test")
     contrast = 0
     for i in range(1, img.shape[0] - 1):
         line_inf = img[i-1, :]
