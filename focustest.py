@@ -3,10 +3,10 @@
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
+import matplotlib.cm as cm
 from random import randint
 
 def get_contrast(img):
-    print("test")
     contrast = 0
     for i in range(1, img.shape[0] - 1):
         line_inf = img[i-1, :]
@@ -28,7 +28,7 @@ def main():
     #img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     img = rgb2gray(image)
     plt.subplot(121)
-    plt.imshow(img)
+    plt.imshow(img, cmap=cm.gray, vmin=0, vmax=255)
     plt.xticks([]), plt.yticks([])
     plt.title('Original')
 
@@ -38,7 +38,7 @@ def main():
         random += 1
     plt.subplot(122)
     blur = cv2.GaussianBlur(img,(random,random),0)
-    plt.imshow(blur)
+    plt.imshow(blur, cmap=cm.gray, vmin=0, vmax=255)
     plt.xticks([]), plt.yticks([])
     plt.title('Blurat')
 
