@@ -6,7 +6,6 @@ def UTRIS(U,b):
     n = len(b)
     x = b
     for i in range ((n-1), (-1), (-1)):
-        print(i)
         for j in range ((i+1),(n)):
             x[i] = x[i] - U[i][j]*x[j]
         x[i] = x[i]/U[i][i]

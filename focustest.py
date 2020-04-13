@@ -5,6 +5,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 import matplotlib.cm as cm
 from random import randint
+from ml_functions import TORT, UTRIS
+from polynomial_fitting import CMMP, polyfit
 
 def get_contrast(img):
     contrast = 0
@@ -31,6 +33,12 @@ def main():
     plt.imshow(img, cmap=cm.gray, vmin=0, vmax=255)
     plt.xticks([]), plt.yticks([])
     plt.title('Original')
+
+    #training
+    for i in range (6):
+        random = randint(1, 100)
+    if random % 2 == 0:
+        random += 1
 
     #afisare imagine blurata
     random = randint(1, 100)

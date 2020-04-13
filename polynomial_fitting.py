@@ -21,9 +21,6 @@ def CMMP(A, b):
     for r in range (m-n):
         del A[-1]
         del b[-1]
-    print (A)
-    print(' ')
-    print (b)
     x = UTRIS(A, b)
     return x
 
@@ -38,12 +35,3 @@ def polyfit(x,y):
     return sol
     
 
-def main():
-    x = [1, 2, 3, 4, 5, 6]
-    y = [1, 2, 3, 4, 5, 6]
-    z = []
-    z = polyfit(x,y)
-    print(z)
-
-if __name__=='__main__':
-    main()
