@@ -18,9 +18,9 @@ def CMMP(A, b):
         for i in range (k, m):
             b[i] = b[i] - sigma * U[i][k]
 
-    for r in range (m-1, n, -1):
-        A.pop(r)
-        b.pop(r)
+    for r in range (m-n):
+        del A[-1]
+        del b[-1]
     print (A)
     print(' ')
     print (b)
