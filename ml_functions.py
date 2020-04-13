@@ -6,6 +6,7 @@ def UTRIS(U,b):
     n = len(b)
     x = b
     for i in range ((n-1), (-1), (-1)):
+        print(i)
         for j in range ((i+1),(n)):
             x[i] = x[i] - U[i][j]*x[j]
         x[i] = x[i]/U[i][i]
@@ -55,11 +56,9 @@ def TORT(A):
 def main():
     M = [[7, 3],[4, 2],[1, 2]]
     b = [2, 2, 6]
+    U=[[1,4,6],[0,2,5],[0, 0, 3]]
     [A,U,beta] = TORT(M)
     print(A)
-    print(' ')
-    print(U)
-    print(' ')
-    print(beta)
+    print(UTRIS(U,b))
 if __name__=='__main__':
     main()
