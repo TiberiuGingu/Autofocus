@@ -25,10 +25,12 @@ def CMMP(A, b):
 
 def polyfit(x,y):
     A = []
+    sol = []
     for i in x:
         v = [i**4, i**3, i*i, i, 1]
         A.append(v)
-    return A
+    sol = CMMP(A, y)
+    return sol
     
 
 def main():
