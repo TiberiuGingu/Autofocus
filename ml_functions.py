@@ -20,7 +20,10 @@ def TORT(A):
         beta.append(0)
     U = []
     for i in range(m):
-        U.append([0,0])
+        zero=[]
+        for j in range(n):
+            zero.append(0)
+        U.append(zero)
     for k in range(0,p):
         sum = 0
         tau = 0
