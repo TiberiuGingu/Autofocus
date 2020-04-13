@@ -23,9 +23,11 @@ def TORT(A):
         U.append([0,0])
     for k in range(0,p):
         sum = 0
+        tau = 0
         for i in range(k,m):
             sum = sum + A[i][k]*A[i][k]
         sum = math.sqrt(sum)
+
         tau = np.sign(A[k][k])*sum
         if tau == 0:
             beta[k] = 0
@@ -52,5 +54,9 @@ def main():
     b = [2, 2, 6]
     [A,U,beta] = TORT(M)
     print(A)
+    print(' ')
+    print(U)
+    print(' ')
+    print(beta)
 if __name__=='__main__':
     main()
