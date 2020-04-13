@@ -5,7 +5,7 @@ import numpy as np
 def polyfit(x,y):
     A = []
     for i in x:
-        v = [i**4, i**3, i*i, i]
+        v = [i**4, i**3, i*i, i, 1]
         A.append(v)
     return A
     
