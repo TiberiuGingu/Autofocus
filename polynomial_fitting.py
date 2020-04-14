@@ -37,9 +37,10 @@ def polyfit(x,y):
 
 def main():
     x = [1, 2, 3, 4, 5, 6]
-    y = [1, 4, 9, 16, 25, 36]
+    y = [1, 4, 9, 18, 25, 36]
     
-    print(polyfit(x,y))
+    z = polyfit(x,y)
+    print(z)
 
 if __name__=='__main__':
     main()
