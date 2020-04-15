@@ -52,12 +52,43 @@ def TORT(A):
                     A[i][j] = A[i][j]-sigma*U[i][k]
     return [A, U, beta]
 
+def evalpoly(v,x):
+    y = 0
+    y = y+v[0]
+    for r in range(1,len(v)):
+        y = y + v[r]*(x**r)
+    return y
+
+def gold( a, b, v, eps ):
+    alfa = (math.sqrt(5)-1)/2
+    n = 1
+    lam = a + (1-alfa)*(b-a)
+    miu = a + alfa*(b-a)
+    while abs(b-a) > eps:
+        if evalpoly(v,lam) < evalpoly(v,miu):
+            b = miu
+            miu = lam
+            lam = a + (1- alfa)*(b-a)
+        else:
+            a = lam
+            lam = miu
+            miu = a + alfa*(b-a)
+        n = n+1
+    ext = (a+b)/2
+    return ext, evalpoly(v, ext)
+
 def main():
-    M = [[7, 3],[4, 2],[1, 2]]
-    b = [2, 2, 6]
-    U=[[1,4,6],[0,2,5],[0, 0, 3]]
-    [A,U,beta] = TORT(M)
-    print(A)
-    print(UTRIS(U,b))
+    # M = [[7, 3],[4, 2],[1, 2]]
+    # b = [2, 2, 6]
+    # U=[[1,4,6],[0,2,5],[0, 0, 3]]
+    # [A,U,beta] = TORT(M)
+    # print(A)
+    # print(UTRIS(U,b))
+    v = [-1,0,1]
+    x = 3
+    print(evalpoly(v,x))
+    [m,n] = gold( -2, 3, v, 3 )
+    print(m,n)
+
 if __name__=='__main__':
     main()

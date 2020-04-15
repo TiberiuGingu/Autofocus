@@ -29,7 +29,7 @@ def polyfit(x,y):
     A = []
     sol = []
     for i in x:
-        v = [i**4, i**3, i*i, i, 1]
+        v = [1, i, i*i, i**3, i**4]
         A.append(v)
     sol = CMMP(A, y)
     return sol
