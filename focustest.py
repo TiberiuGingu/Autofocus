@@ -42,6 +42,7 @@ def main():
 
     #afisare imagine blurata
     random = randint(1, 100)
+    print(random)
     if random % 2 == 0:
         random += 1
     plt.subplot(122)

@@ -84,10 +84,10 @@ def main():
     # [A,U,beta] = TORT(M)
     # print(A)
     # print(UTRIS(U,b))
-    v = [-1,0,1]
+    v = [-123,751,1200,6500,-12]
     x = 3
     print(evalpoly(v,x))
-    [m,n] = gold( -2, 3, v, 3 )
+    [m,n] = gold( -500, 500, v, 0.1 )
     print(m,n)
 
 if __name__=='__main__':
