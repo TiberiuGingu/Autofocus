@@ -37,7 +37,7 @@ def polyfit(x,y):
 
 def main():
     x = [1, 2, 3, 4, 5, 6]
-    y = [1, 4, 9, 18, 25, 36]
+    y = [1, 0.5, 0.33, 0.25, 0.2, 0.16]
     
     z = polyfit(x,y)
     print(z)

@@ -7,7 +7,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import matplotlib.cm as cm
 from random import randint
-from ml_functions import TORT, UTRIS
+from ml_functions import TORT, UTRIS, evalpoly
 from polynomial_fitting import CMMP, polyfit
 
 def get_contrast(img):
@@ -31,36 +31,49 @@ def main():
     y=[]
 
     #citire si afisare imagine originala
-    OrgImage = Image.open("poza.png")
+    OrgImage = Image.open("poza2.jpg")
     OrgImage.show()
-    image = cv2.imread("poza.png")
+    image = cv2.imread("poza2.jpg")
     img = rgb2gray(image)
-    
-    # plt.subplot(121)
-    # plt.imshow(img, cmap=cm.gray, vmin=0, vmax=255)
-    # plt.xticks([]), plt.yticks([])
-    # plt.title('Original')
 
-    #imagine blurata random
-    boxImage = OrgImage.filter(ImageFilter.BoxBlur(40))
-    boxImage.show()
+
+    # #imagine blurata random
+    # boxImage = OrgImage.filter(ImageFilter.BoxBlur(80))
+    # boxImage.save(".\\auxiliar.jpg")
+    # blur = cv2.imread("auxiliar.jpg")
+    # bl = rgb2gray(blur)
+    # print(get_contrast(bl))
+    # boxImage.show()
+    # boxImage = OrgImage.filter(ImageFilter.BoxBlur(90))
+    # boxImage.save(".\\auxiliar.jpg")
+    # blur = cv2.imread("auxiliar.jpg")
+    # bl = rgb2gray(blur)
+    # print(get_contrast(bl))
+    # boxImage.show()
+
 
     #training vector
-    for i in range (10):
+    for i in range (100):
         random = randint(1,80)
-        x.append(random)
-        boxImage = OrgImage.filter(ImageFilter.BoxBlur(20.34))
-        boxImage.show()
-        boxImage.save(".\\auxiliar.png")
-        blur = cv2.imread("auxiliar.png")
+        #x.append(random)
+        x.append(i)
+        boxImage = OrgImage.filter(ImageFilter.BoxBlur(i))
+        boxImage.save(".\\auxiliar.jpg")
+        blur = cv2.imread("auxiliar.jpg")
         bl = rgb2gray(blur)
+        y.append(get_contrast(bl))
 
-    # plt.subplot(122)
-    # blur = cv2.GaussianBlur(img,(random,random),0)
-    # plt.imshow(blur, cmap=cm.gray, vmin=0, vmax=255)
-    # plt.xticks([]), plt.yticks([])
-    # plt.title('Blurat')
-    # plt.show()
+
+    coef = polyfit(x, y)
+    y_contrast = []
+    x_contrast = []
+    for i in range (100):
+        x_contrast.append(i)
+        y_contrast.append(evalpoly(coef, i))
+
+    plt.plot(x_contrast, y_contrast)
+    plt.show()
+
 
     #afisare contrast
     print(get_contrast(img))
