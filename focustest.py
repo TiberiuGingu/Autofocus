@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import cv2
+from PIL import Image
+from PIL import ImageFilter
 import numpy as np
 from matplotlib import pyplot as plt
 import matplotlib.cm as cm
@@ -25,36 +27,44 @@ def rgb2gray(rgb):
     return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
 
 def main():
+    x=[]
+    y=[]
+
     #citire si afisare imagine originala
-    image = cv2.imread('poza.png')
-    #img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    OrgImage = Image.open("poza.png")
+    OrgImage.show()
+    image = cv2.imread("poza.png")
     img = rgb2gray(image)
-    plt.subplot(121)
-    plt.imshow(img, cmap=cm.gray, vmin=0, vmax=255)
-    plt.xticks([]), plt.yticks([])
-    plt.title('Original')
+    
+    # plt.subplot(121)
+    # plt.imshow(img, cmap=cm.gray, vmin=0, vmax=255)
+    # plt.xticks([]), plt.yticks([])
+    # plt.title('Original')
 
-    #training
-    for i in range (6):
-        random = randint(1, 100)
-    if random % 2 == 0:
-        random += 1
+    #imagine blurata random
+    boxImage = OrgImage.filter(ImageFilter.BoxBlur(40))
+    boxImage.show()
 
-    #afisare imagine blurata
-    random = randint(1, 100)
-    print(random)
-    if random % 2 == 0:
-        random += 1
-    plt.subplot(122)
-    blur = cv2.GaussianBlur(img,(random,random),0)
-    plt.imshow(blur, cmap=cm.gray, vmin=0, vmax=255)
-    plt.xticks([]), plt.yticks([])
-    plt.title('Blurat')
+    #training vector
+    for i in range (10):
+        random = randint(1,80)
+        x.append(random)
+        boxImage = OrgImage.filter(ImageFilter.BoxBlur(20.34))
+        boxImage.show()
+        boxImage.save(".\\auxiliar.png")
+        blur = cv2.imread("auxiliar.png")
+        bl = rgb2gray(blur)
 
-    plt.show()
+    # plt.subplot(122)
+    # blur = cv2.GaussianBlur(img,(random,random),0)
+    # plt.imshow(blur, cmap=cm.gray, vmin=0, vmax=255)
+    # plt.xticks([]), plt.yticks([])
+    # plt.title('Blurat')
+    # plt.show()
 
     #afisare contrast
     print(get_contrast(img))
-    print(get_contrast(blur))
+    print(get_contrast(bl))
+
 if __name__ == "__main__":
     main()
