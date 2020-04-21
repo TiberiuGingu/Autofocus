@@ -33,14 +33,3 @@ def polyfit(x,y):
         A.append(v)
     sol = CMMP(A, y)
     return sol
-    
-
-def main():
-    x = [1, 2, 3, 4, 5, 6]
-    y = [1, 0.5, 0.33, 0.25, 0.2, 0.16]
-    
-    z = polyfit(x,y)
-    print(z)
-
-if __name__=='__main__':
-    main()

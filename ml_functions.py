@@ -60,6 +60,7 @@ def evalpoly(v,x):
     return y
 
 def gold( a, b, v, eps ):
+    val = []
     alfa = (math.sqrt(5)-1)/2
     n = 1
     lam = a + (1-alfa)*(b-a)
@@ -69,26 +70,12 @@ def gold( a, b, v, eps ):
             b = miu
             miu = lam
             lam = a + (1- alfa)*(b-a)
+            val.append(miu)
         else:
             a = lam
             lam = miu
             miu = a + alfa*(b-a)
+            val.append(lam)
         n = n+1
     ext = (a+b)/2
-    return ext, evalpoly(v, ext)
-
-def main():
-    # M = [[7, 3],[4, 2],[1, 2]]
-    # b = [2, 2, 6]
-    # U=[[1,4,6],[0,2,5],[0, 0, 3]]
-    # [A,U,beta] = TORT(M)
-    # print(A)
-    # print(UTRIS(U,b))
-    v = [-123,751,1200,6500,-12]
-    x = 3
-    print(evalpoly(v,x))
-    [m,n] = gold( -500, 500, v, 0.1 )
-    print(m,n)
-
-if __name__=='__main__':
-    main()
+    return ext, evalpoly(v, ext), val
