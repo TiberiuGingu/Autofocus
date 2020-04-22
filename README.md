@@ -1,6 +1,10 @@
 # Autofocus
 
-Autofocus simulates the procces through which a camera focuses on a specific object.
+Autofocus simulates the process through which a camera focuses an image by gradually changing the focal distance to an optimal value. In our case the focal distance is represented by the blur level, because we do not dispose of three dimensional images.
+
+## How does it work?
+
+The picture is blurred with a certain level introduced from the keyboard.In order to determine the function between the contrast and blur level we need to utilize a training process and the Least Squares method. The minimum of this function is calculated to find the optimal blur level for which the image is in focus. 
 
 ## How to run the program
 
