@@ -37,25 +37,38 @@ def main():
     image = cv2.imread("poza.png")
     img = rgb2gray(image)
 
-    print("Nivel de blur ( cuprins intre 0 si 100 ):")
-    nivel_blur = int(input())
+    print("Blur level ( in range (1, 100) ):")
+    nivel_blur = float(input())
 
+    while nivel_blur < 1:
+        print("Blur must be over 1 :")
+        nivel_blur = float(input())
+        
     #training
-    for i in range (nivel_blur+10):
-        x.append(i)
-        boxImage = OrgImage.filter(ImageFilter.BoxBlur(i))
-        boxImage.save(".\\auxiliar.jpg")
-        blur = cv2.imread("auxiliar.jpg")
-        bl = rgb2gray(blur)
-        y.append(get_contrast(bl))
+    if nivel_blur < 5:
+        for i in range (20):
+            x.append(i)
+            boxImage = OrgImage.filter(ImageFilter.BoxBlur(i))
+            boxImage.save(".\\auxiliar.png")
+            blur = cv2.imread("auxiliar.png")
+            bl = rgb2gray(blur)
+            y.append(get_contrast(bl))
+    else:
+        for i in range (math.ceil((nivel_blur+10)/2)):
+            x.append(2*i)
+            boxImage = OrgImage.filter(ImageFilter.BoxBlur(2*i))
+            boxImage.save(".\\auxiliar.png")
+            blur = cv2.imread("auxiliar.png")
+            bl = rgb2gray(blur)
+            y.append(get_contrast(bl))
 
     # determinarea polinomului care aproximeaza functia
     coef = polyfit(x, y)
     y_contrast = []
     x_contrast = []
-    for i in range (nivel_blur+10):
-        x_contrast.append(i)
-        y_contrast.append(evalpoly(coef, i))
+    for i in range (math.ceil((nivel_blur+10)/2)):
+        x_contrast.append(2*i)
+        y_contrast.append(evalpoly(coef, 2*i))
 
     # aflare minim
     for i in range(len(coef)):
@@ -66,7 +79,7 @@ def main():
     if nivel_blur > 20:
         k = math.ceil((nivel_blur/20)-1)
         for i in range(1,k):
-            x_aux, y_aux, val_aux = gold( 20*i, 20*(i+1), coef, 2 )
+            x_aux, y_aux, val_aux = gold( 20*i, 20*(i+1), coef, 1 )
             if x_min < x_aux:
                 val_min = [val_aux[0]] + val_min
             else:
@@ -88,11 +101,13 @@ def main():
     plt.grid(True)
     plt.title('Grafic')
     boxImage = OrgImage.filter(ImageFilter.BoxBlur(nivel_blur))
-    boxImage.save(".\\auxiliar.jpg")
-    blur = cv2.imread("auxiliar.jpg")
+    boxImage.save(".\\auxiliar.png")
+    blur = cv2.imread("auxiliar.png")
+
     plt.subplot(122),plt.imshow(blur),plt.title('Imagine')
     plt.xticks([]), plt.yticks([])
-    plt.show()
+    plt.savefig('results.png')
+    print('Press enter to continue')
     input()
 
     for i in val_min:
@@ -103,11 +118,11 @@ def main():
         plt.grid(True)
         plt.title('Grafic')
         boxImage = OrgImage.filter(ImageFilter.BoxBlur(i))
-        boxImage.save(".\\auxiliar.jpg")
-        blur = cv2.imread("auxiliar.jpg")
+        boxImage.save(".\\auxiliar.png")
+        blur = cv2.imread("auxiliar.png")
         plt.subplot(122),plt.imshow(blur),plt.title('Imagine')
         plt.xticks([]), plt.yticks([])
-        plt.show()
+        plt.savefig('results.png')
         input()
 
 
