@@ -4,7 +4,10 @@ Autofocus simulates the process through which a camera focuses an image by gradu
 
 ## How does it work?
 
-The picture is blurred with a certain level introduced from the keyboard.In order to determine the function between the contrast and blur level we need to utilize a training process and the Least Squares method. The minimum of this function is calculated to find the optimal blur level for which the image is in focus. 
+The picture is blurred with a certain level introduced from the keyboard.
+
+Then a training process is needed to determine the function between the contrast and blur level .The image is blurred with different levels and the contrasts are calculated, to obtain a data set. The minimum of this function is used to find the optimal blur level for which the image is in focus. 
+
 
 ## How to run the program
 
