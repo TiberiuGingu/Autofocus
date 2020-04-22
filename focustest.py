@@ -60,8 +60,9 @@ def main():
         nivel_blur = float(input())
         
     #training
-    printProgressBar(0, math.ceil((nivel_blur+10)/2), prefix = 'Progress:', suffix = 'Complete', length = 50)
+    
     if nivel_blur < 5:
+        printProgressBar(0, 20, prefix = 'Progress:', suffix = 'Complete', length = 50)
         for i in range (20):
             x.append(i)
             boxImage = OrgImage.filter(ImageFilter.BoxBlur(i))
@@ -69,7 +70,9 @@ def main():
             blur = cv2.imread("auxiliar."+ extension)
             bl = rgb2gray(blur)
             y.append(get_contrast(bl))
+            printProgressBar(i + 1, 20, prefix = 'Progress:', suffix = 'Complete', length = 50)
     else:
+        printProgressBar(0, math.ceil((nivel_blur+10)/2), prefix = 'Progress:', suffix = 'Complete', length = 50)
         for i in range (math.ceil((nivel_blur+10)/2)):
             x.append(2*i)
             boxImage = OrgImage.filter(ImageFilter.BoxBlur(2*i))
