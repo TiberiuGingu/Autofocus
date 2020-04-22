@@ -46,6 +46,11 @@ def main():
     #identificare extensie poza
     extension = photo_name.split('.')[-1]
 
+    if extension != 'png' or extension != 'jpg':
+        print("File must be .png or .jpg. Choose another file:")
+        photo_name = input()
+        extension = photo_name.split('.')[-1]   
+
     #citire si afisare imagine originala
     OrgImage = Image.open(photo_name)
     OrgImage.show()
