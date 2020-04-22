@@ -1,4 +1,3 @@
-# Autofocus
 
 Autofocus simulates the process through which a camera focuses an image by gradually changing the focal distance to an optimal value. In our case the focal distance is represented by the blur level, because we do not dispose of three dimensional images.
 
@@ -6,8 +5,11 @@ Autofocus simulates the process through which a camera focuses an image by gradu
 
 The picture is blurred with a certain level introduced from the keyboard.
 
-Then a training process is needed to determine the function between the contrast and blur level .The image is blurred with different levels and the contrasts are calculated, to obtain a data set. The minimum of this function is used to find the optimal blur level for which the image is in focus. 
+Then a training process is needed to determine the function between the contrast and blur level.The image is blurred with different levels and the contrasts are calculated, to obtain a data set of points [blur, contrast]. Applying least squares method we can aproximate the function's curve.
 
+With the curve drawn, we can plot the position of the originally blurred image on it. Using the golden section method, we search for the maximum function value which represents the point where the blur is optimal and it has the biggest contrast. 
+
+The blur is reduced gradually and the contrast is increasing, while displaying the image right next to the chart. In the end the image will return to the original one.
 
 ## How to run the program
 
@@ -29,4 +31,3 @@ The name of the libraries are:
 - matplotlib
 - numpy
 - opencv
-
