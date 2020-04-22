@@ -46,7 +46,7 @@ def main():
     #identificare extensie poza
     extension = photo_name.split('.')[-1]
 
-    if extension != 'png' or extension != 'jpg':
+    if extension != 'png' and extension != 'jpg':
         print("File must be .png or .jpg. Choose another file:")
         photo_name = input()
         extension = photo_name.split('.')[-1]   
@@ -128,8 +128,9 @@ def main():
     boxImage = OrgImage.filter(ImageFilter.BoxBlur(nivel_blur))
     boxImage.save(".\\auxiliar." + extension)
     blur = cv2.imread("auxiliar." + extension)
-
-    plt.subplot(122),plt.imshow(blur),plt.title('Imagine')
+    plt.subplot(122)
+    plt.imshow(cv2.cvtColor(blur, cv2.COLOR_BGR2RGB))
+    plt.title('Imagine')
     plt.xticks([]), plt.yticks([])
     plt.savefig('results.png')
     print('Open result.png and press enter to continue')
@@ -145,7 +146,9 @@ def main():
         boxImage = OrgImage.filter(ImageFilter.BoxBlur(i))
         boxImage.save(".\\auxiliar." + extension)
         blur = cv2.imread("auxiliar." + extension)
-        plt.subplot(122),plt.imshow(blur),plt.title('Imagine')
+        plt.subplot(122)
+        plt.imshow(cv2.cvtColor(blur, cv2.COLOR_BGR2RGB))
+        plt.title('Imagine')
         plt.xticks([]), plt.yticks([])
         plt.savefig('results.png')
         input()
