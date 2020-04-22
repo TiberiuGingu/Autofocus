@@ -9,6 +9,9 @@ from random import randint
 from ml_functions import TORT, UTRIS, evalpoly, gold
 from polynomial_fitting import CMMP, polyfit
 import math
+import sys
+import time
+from progress_bar import printProgressBar
 
 # functie pentru calcularea contrastului
 def get_contrast(img):
@@ -31,10 +34,22 @@ def main():
     x=[]
     y=[]
 
+    #alegere poza
+    
+    if len (sys.argv) != 2 :
+        print ("Wrong number of arguments taken from console! (expected 1 argument but recieved:" , len(sys.argv) - 1, ")")
+        sys.exit (1)
+
+    else:
+        photo_name = sys.argv[1]
+
+    #identificare extensie poza
+    extension = photo_name.split('.')[-1]
+
     #citire si afisare imagine originala
-    OrgImage = Image.open("poza.png")
+    OrgImage = Image.open(photo_name)
     OrgImage.show()
-    image = cv2.imread("poza.png")
+    image = cv2.imread(photo_name)
     img = rgb2gray(image)
 
     print("Blur level ( in range (1, 100) ):")
@@ -45,22 +60,24 @@ def main():
         nivel_blur = float(input())
         
     #training
+    printProgressBar(0, math.ceil((nivel_blur+10)/2), prefix = 'Progress:', suffix = 'Complete', length = 50)
     if nivel_blur < 5:
         for i in range (20):
             x.append(i)
             boxImage = OrgImage.filter(ImageFilter.BoxBlur(i))
-            boxImage.save(".\\auxiliar.png")
-            blur = cv2.imread("auxiliar.png")
+            boxImage.save(".\\auxiliar." + extension)
+            blur = cv2.imread("auxiliar."+ extension)
             bl = rgb2gray(blur)
             y.append(get_contrast(bl))
     else:
         for i in range (math.ceil((nivel_blur+10)/2)):
             x.append(2*i)
             boxImage = OrgImage.filter(ImageFilter.BoxBlur(2*i))
-            boxImage.save(".\\auxiliar.png")
-            blur = cv2.imread("auxiliar.png")
+            boxImage.save(".\\auxiliar." + extension)
+            blur = cv2.imread("auxiliar." + extension)
             bl = rgb2gray(blur)
             y.append(get_contrast(bl))
+            printProgressBar(i + 1, math.ceil((nivel_blur+10)/2), prefix = 'Progress:', suffix = 'Complete', length = 50)
 
     # determinarea polinomului care aproximeaza functia
     coef = polyfit(x, y)
@@ -101,13 +118,13 @@ def main():
     plt.grid(True)
     plt.title('Grafic')
     boxImage = OrgImage.filter(ImageFilter.BoxBlur(nivel_blur))
-    boxImage.save(".\\auxiliar.png")
-    blur = cv2.imread("auxiliar.png")
+    boxImage.save(".\\auxiliar." + extension)
+    blur = cv2.imread("auxiliar." + extension)
 
     plt.subplot(122),plt.imshow(blur),plt.title('Imagine')
     plt.xticks([]), plt.yticks([])
     plt.savefig('results.png')
-    print('Press enter to continue')
+    print('Open result.png and press enter to continue')
     input()
 
     for i in val_min:
@@ -118,8 +135,8 @@ def main():
         plt.grid(True)
         plt.title('Grafic')
         boxImage = OrgImage.filter(ImageFilter.BoxBlur(i))
-        boxImage.save(".\\auxiliar.png")
-        blur = cv2.imread("auxiliar.png")
+        boxImage.save(".\\auxiliar." + extension)
+        blur = cv2.imread("auxiliar." + extension)
         plt.subplot(122),plt.imshow(blur),plt.title('Imagine')
         plt.xticks([]), plt.yticks([])
         plt.savefig('results.png')
