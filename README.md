@@ -1,3 +1,4 @@
+# Autofocus
 
 Autofocus simulates the process through which a camera focuses an image by gradually changing the focal distance to an optimal value. In our case the focal distance is represented by the blur level, because we do not dispose of three dimensional images.
 
@@ -27,7 +28,7 @@ The pictures must have a reasonable contrast which means they shouldn't be compl
 Assuming that you have already installed python3, you will also need to install some libraries by typing the following command: ```pip install <library name>```, in the console.
 
 The name of the libraries are: 
-- PILLOW 
-- matplotlib
-- numpy
-- opencv
+- ```PILLOW```
+- ```matplotlib```
+- ```numpy```
+- ```opencv```
