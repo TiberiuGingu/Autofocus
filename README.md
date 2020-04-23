@@ -1,5 +1,7 @@
 # Autofocus
 
+## Purpose
+
 Autofocus simulates the process through which a camera focuses an image by gradually changing the focal distance to an optimal value. In our case the focal distance is represented by the blur level, because we do not dispose of three dimensional images.
 
 ## How does it work?
